@@ -16,13 +16,15 @@ import (
 )
 
 // This function grabs the SSL certificate, then dumps the SAN and CommonName
-func sslChecks(url string, resChan chan<- string, client *http.Client) {
+func sslChecks(ip string, resChan chan<- string, client *http.Client) {
+
+	url := ip
 
 	// make sure we use https as we're doing SSL checks
-	if strings.HasPrefix(url, "http://") {
-		url = strings.Replace(url, "http://", "https://", 1)
-	} else if !strings.HasPrefix(url, "https://") {
-		url = "https://" + url
+	if strings.HasPrefix(ip, "http://") {
+		url = strings.Replace(ip, "http://", "https://", 1)
+	} else if !strings.HasPrefix(ip, "https://") {
+		url = "https://" + ip
 	}
 
 	req, reqErr := http.NewRequest("HEAD", url, nil)
@@ -38,9 +40,9 @@ func sslChecks(url string, resChan chan<- string, client *http.Client) {
 	if resp.TLS != nil && len(resp.TLS.PeerCertificates) > 0 {
 		dnsNames := resp.TLS.PeerCertificates[0].DNSNames
 		for _, name := range dnsNames {
-			resChan <- "[SSL-SAN] " + url + " " + string(name)
+			resChan <- "[SSL-SAN] " + ip + " " + string(name)
 		}
-		resChan <- "[SSL-CN] " + url + " " + resp.TLS.PeerCertificates[0].Subject.CommonName
+		resChan <- "[SSL-CN] " + ip + " " + resp.TLS.PeerCertificates[0].Subject.CommonName
 	}
 }
 
