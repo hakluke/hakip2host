@@ -7,6 +7,14 @@ Current supported checks are:
 - Subject Alternative Names (SANs) on SSL certificates
 - Common Names (CNs) on SSL certificates
 
+## Installation
+
+Install golang, then:
+
+```
+go install github.com/hakluke/hakip2host@latest
+```
+
 ## Help
 
 ```
