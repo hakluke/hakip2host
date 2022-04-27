@@ -136,6 +136,9 @@ func main() {
 		case <-done:
 			return
 		case res := <-resChan:
+			if strings.HasSuffix(res, ".") {
+				res = res[:len(res)-1]
+			}
 			fmt.Println(res)
 		}
 	}
