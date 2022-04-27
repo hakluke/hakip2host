@@ -7,6 +7,14 @@ Current supported checks are:
 - Subject Alternative Names (SANs) on SSL certificates
 - Common Names (CNs) on SSL certificates
 
+## Installation
+
+Install golang, then:
+
+```
+go install github.com/hakluke/hakip2host@latest
+```
+
 ## Help
 
 ```
@@ -16,7 +24,7 @@ Current supported checks are:
 ## Example usage
 
 ```
-hakip2host$ prips 173.0.84.0/24 | ./hakip2host
+hakluke$ prips 173.0.84.0/24 | ./hakip2host
 [DNS-PTR] 173.0.84.23 new-creditcenter.paypal.com.
 [DNS-PTR] 173.0.84.11 slc-a-origin-www-1.paypal.com.
 [DNS-PTR] 173.0.84.10 admin.paypal.com.
